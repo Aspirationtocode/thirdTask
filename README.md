@@ -59,23 +59,25 @@ _Консоль сообщала об ошибке на 36 строке файл
 Строки: `26 - 37 файла worker.js`
 Для исправления ошибки требуется заменить данный код:
 ```javascript
-  if (/^\/api\/v1/.test(requestURL.pathname)) {
-      return event.respondWith(
-          Promise.race([
-              fetchAndPutToCache(event.request),
-              getFromCache(event.request)
-          ])
-      );
-  }
+if (/^\/api\/v1/.test(requestURL.pathname)) {
+    return event.respondWith(
+        Promise.race([
+            fetchAndPutToCache(event.request),
+            getFromCache(event.request)
+        ])
+    );
+}
 
-  return event.respondWith(
-      getFromCache(event.request).catch(fetchAndPutToCache)
-  );
+return event.respondWith(
+    getFromCache(event.request).catch(fetchAndPutToCache)
+);
 ```
 на такой код:
 ```javascript
 return event.respondWith(fetchAndPutToCache(event.request));
 ```
 `Комментарий к ошибке:`
-_Консоль сообщала об ошибке на 36 строке файла worker.js. Убрав лишнюю `;` удалось устранить ошибку._
+_Гонка промисов здесь не нужна, потому что взять из кэша всегда быстрее чем сделать запрос и положить в кэш._
+Заглянув в гугл(https://developers.google.com/web/fundamentals/getting-started/push-notifications/step-03) я нашел пару строк о том, что файл worker'а должен находится в корневой директории приложения. 
+Цитирую гугл: `In your app directory, create an empty file named sw.js. You’ll add code to this later.`
 
