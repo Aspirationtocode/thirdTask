@@ -53,5 +53,29 @@ return event.respondWith(
 );
 ```
 `Комментарий к ошибке:`
-_Консоль сообщала об ошибке на 36 строке файла worker.js. Убрав лишнюю `;` удалось устранить ошибку_
+_Консоль сообщала об ошибке на 36 строке файла worker.js. Убрав лишнюю `;` удалось устранить ошибку._
+
+## Ошибка №3
+Строки: `26 - 37 файла worker.js`
+Для исправления ошибки требуется заменить данный код:
+```javascript
+  if (/^\/api\/v1/.test(requestURL.pathname)) {
+      return event.respondWith(
+          Promise.race([
+              fetchAndPutToCache(event.request),
+              getFromCache(event.request)
+          ])
+      );
+  }
+
+  return event.respondWith(
+      getFromCache(event.request).catch(fetchAndPutToCache)
+  );
+```
+на такой код:
+```javascript
+return event.respondWith(fetchAndPutToCache(event.request));
+```
+`Комментарий к ошибке:`
+_Консоль сообщала об ошибке на 36 строке файла worker.js. Убрав лишнюю `;` удалось устранить ошибку._
 
