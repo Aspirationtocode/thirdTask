@@ -18,7 +18,7 @@
 #Решение.
 
 ## Ошибка №1
-Строки: `3 - 7 worker.js`
+Строки: `3 - 7 файла worker.js`
 Для исправления ошибки требуется заменить данный код:
 ```javascript
 var urlsToCache = [
@@ -37,4 +37,21 @@ var urlsToCache = [
 ```
 `Комментарий к ошибке:`
 _Консоль сообщала об отсутствии доступа к js и css файлам. Для исправления потребовалось прописать новый путь._
+
+## Ошибка №2
+Строки: `35 - 37 файла worker.js`
+Для исправления ошибки требуется заменить данный код:
+```javascript
+return event.respondWith(
+  getFromCache(event.request).catch(fetchAndPutToCache);
+);
+```
+на такой код:
+```javascript
+return event.respondWith(
+  getFromCache(event.request).catch(fetchAndPutToCache)
+);
+```
+`Комментарий к ошибке:`
+_Консоль сообщала об ошибке на 36 строке файла worker.js. Убрав лишнюю `;` удалось устранить ошибку_
 
