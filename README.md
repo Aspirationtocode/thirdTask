@@ -78,6 +78,8 @@ return event.respondWith(fetchAndPutToCache(event.request));
 ```
 `Комментарий к ошибке:`
 _Гонка промисов здесь не нужна, потому что взять из кэша всегда быстрее чем сделать запрос и положить в кэш._
-Заглянув в гугл(https://developers.google.com/web/fundamentals/getting-started/push-notifications/step-03) я нашел пару строк о том, что файл worker'а должен находится в корневой директории приложения. 
+
+## Замечание
+Заглянув в гугл (https://developers.google.com/web/fundamentals/getting-started/push-notifications/step-03) я нашел пару строк о том, что файл worker'а должен находится в корневой директории приложения. 
 Цитирую гугл: `In your app directory, create an empty file named sw.js. You’ll add code to this later.`
 
